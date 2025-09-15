@@ -1,0 +1,382 @@
+/* --- TABLE OF CONTENTS ---
+1.  Global Styles & Variables
+2.  Utility Classes
+3.  Header / Navigation Bar
+4.  Hero Section
+5.  About Section
+6.  Services Section
+7.  Why Us Section
+8.  Call to Action (CTA) Section
+9.  Contact Section
+10. Footer
+11. Animations & Responsive Design
+--------------------------- */
+
+/* 1. Global Styles & Variables */
+:root {
+    /* !! IMPORTANT !!
+    Replace these colors with the hex codes from your logo.
+    --primary-color: Your main brand color (e.g., a deep blue)
+    --secondary-color: Your accent color (e.g., a gold or grey)
+    --background-color: The main background (usually white or off-white)
+    --text-color: Main text color
+    --heading-color: Color for main titles
+    */
+    --primary-color: #0D2149;    /* A deep, professional navy blue */
+    --secondary-color: #B58D4D; /* A sophisticated gold accent */
+    --background-color: #F8F9FA; /* A very light grey for subtle contrast */
+    --text-color: #555;
+    --heading-color: #111;
+    --white-color: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white-color);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Utility Classes */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section {
+    padding: 5rem 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+h1, h2, h3 {
+    color: var(--heading-color);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--secondary-color);
+    color: var(--white-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #a07b3e; /* Darker shade of gold */
+    transform: translateY(-2px);
+}
+
+.btn-light {
+    background: var(--white-color);
+    color: var(--primary-color);
+}
+.btn-light:hover {
+    background: #f1f1f1;
+    color: var(--primary-color);
+}
+
+/* 3. Header / Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* CHANGED: Solid white background */
+    background-color: var(--white-color); 
+    /* REMOVED: backdrop-filter: blur(10px); */
+    /* CHANGED: Increased padding for the larger logo */
+    padding: 1rem 0; 
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transition: top 0.3s;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo img {
+    /* CHANGED: Height increased by 40% (50px -> 70px) */
+    height: 70px; 
+    width: auto;
+}
+
+.navbar nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar nav ul li {
+    margin-left: 2rem;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.navbar nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* 4. Hero Section */
+#hero {
+    height: 100vh;
+    /* UPDATED: Using your local hero-background.jpg file */
+    background: linear-gradient(rgba(13, 33, 73, 0.7), rgba(13, 33, 73, 0.7)), url('hero-background.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--white-color);
+    padding-top: 60px; /* Offset for the fixed navbar */
+}
+
+#hero .hero-content {
+    max-width: 800px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--white-color);
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* 5. About Section */
+#about {
+    text-align: center;
+}
+
+/* 6. Services Section */
+.services-bg {
+    background-color: var(--background-color);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--white-color);
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.service-card ul {
+    list-style: none;
+}
+
+.service-card ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+.service-card ul li::before {
+    content: '\f00c'; /* Font Awesome check icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0;
+}
+
+/* 7. Why Us Section */
+.why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.feature-box i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.feature-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 8. Call to Action (CTA) Section */
+#cta {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    text-align: center;
+}
+
+#cta h2 {
+    color: var(--white-color);
+}
+#cta p {
+    margin-bottom: 2rem;
+}
+
+/* 9. Contact Section */
+#contact {
+    background-color: var(--background-color);
+}
+
+.contact-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    width: 20px;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.contact-form button {
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+}
+
+/* 10. Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+/* 11. Animations & Responsive Design */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .navbar .container {
+        flex-direction: column;
+    }
+    .navbar nav ul {
+        margin-top: 1rem;
+    }
+    .navbar nav ul li {
+        margin: 0 0.5rem;
+    }
+
+    .contact-details {
+        grid-template-columns: 1fr;
+    }
+}
