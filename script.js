@@ -1,32 +1,54 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Smooth Scrolling for Navbar links ---
-    const navLinks = document.querySelectorAll('nav ul li a');
-    
+    // --- Smart Scrolling for Navbar links (Updated) ---
+    // This new code handles both same-page and cross-page links.
+    const navLinks = document.querySelectorAll('header nav a');
+
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            document.querySelector(targetId).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const href = this.getAttribute('href');
+
+            // Check if it's a link to another page (like 'resources.html')
+            if (!href.startsWith('#') && href.includes('.html')) {
+                // Let the browser handle the navigation normally
+                return;
+            }
+
+            // Check if it's a link to a section on the homepage
+            if (href.startsWith('index.html#')) {
+                // If we are NOT on the homepage, let the browser navigate
+                if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('index.html')) {
+                    return;
+                }
+            }
+
+            // If we are on the homepage and the link is a hash, smooth scroll
+            const targetId = this.hash;
+            if (targetId) {
+                e.preventDefault(); // Prevent default jump
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
         });
     });
 
-    // --- Fade-in sections on scroll ---
+    // --- Fade-in sections on scroll (No changes needed here) ---
     const sections = document.querySelectorAll('.section');
 
     const sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            // If the section is intersecting the viewport, add the 'visible' class
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once it's visible
+                observer.unobserve(entry.target);
             }
         });
     }, {
         rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% of the section is visible
+        threshold: 0.1
     });
 
     sections.forEach(section => {
