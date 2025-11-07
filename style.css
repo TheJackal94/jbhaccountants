@@ -469,3 +469,28 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* 15. Form Status Styles
+--------------------------- */
+#form-status {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#form-status.sending {
+    color: var(--text-color);
+    opacity: 1;
+}
+
+#form-status.success {
+    color: #28a745; /* A nice green */
+    opacity: 1;
+}
+
+#form-status.error {
+    color: #dc3545; /* A clear red */
+    opacity: 1;
+}
