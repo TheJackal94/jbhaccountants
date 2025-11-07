@@ -10,6 +10,10 @@
 9.  Contact Section
 10. Footer
 11. Animations & Responsive Design
+12. New Page Styles
+13. (Section 13 was removed)
+14. Fix for initial section visibility
+15. Form Status Styles
 --------------------------- */
 
 /* 1. Global Styles & Variables */
@@ -361,25 +365,6 @@ footer {
     transform: translateY(0);
 }
 
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    .navbar .container {
-        flex-direction: column;
-    }
-    .navbar nav ul {
-        margin-top: 1rem;
-    }
-    .navbar nav ul li {
-        margin: 0 0.5rem;
-    }
-
-    .contact-details {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* 12. New Page Styles
 --------------------------- */
@@ -456,12 +441,67 @@ footer {
     color: var(--primary-color);
 }
 
-/* Responsive adjustments for new sections */
+
+/* ===============================================
+  MOBILE RESPONSIVE STYLES (Consolidated)
+===============================================
+*/
 @media (max-width: 768px) {
+
+    /* --- General Mobile Styles --- */
+    .container {
+        /* Reduce padding on small screens to give content more space */
+        padding: 0 1rem;
+    }
+
+    h1, #hero h1 {
+        /* Further reduce hero title size */
+        font-size: 2.2rem; 
+    }
+
+    h2 {
+        /* Reduce section heading size */
+        font-size: 2rem;
+    }
+
+    /* --- Mobile Navigation --- */
+    .navbar .container {
+        flex-direction: column;
+    }
+
+    .navbar nav ul {
+        /* Stack nav links vertically */
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .navbar nav ul li {
+        /* Add vertical spacing */
+        margin: 0.5rem 0;
+        padding: 0.25rem;
+    }
+
+    /* --- Grid Fixes for index.html --- */
+    .services-grid,
+    .why-us-grid {
+        /* Force single-column layout for services and features */
+        grid-template-columns: 1fr;
+    }
+
+    /* --- Contact Form Fix --- */
+    .contact-details {
+        grid-template-columns: 1fr;
+    }
+
+    /* --- Other Pages Fix --- */
     .resources-grid {
         grid-template-columns: 1fr;
     }
 }
+/* (End of consolidated mobile styles) */
+
 
 /* 14. Fix for initial section visibility
 --------------------------- */
