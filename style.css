@@ -18,17 +18,9 @@
 
 /* 1. Global Styles & Variables */
 :root {
-    /* !! IMPORTANT !!
-    Replace these colors with the hex codes from your logo.
-    --primary-color: Your main brand color (e.g., a deep blue)
-    --secondary-color: Your accent color (e.g., a gold or grey)
-    --background-color: The main background (usually white or off-white)
-    --text-color: Main text color
-    --heading-color: Color for main titles
-    */
-    --primary-color: #0D2149;    /* A deep, professional navy blue */
-    --secondary-color: #B58D4D; /* A sophisticated gold accent */
-    --background-color: #F8F9FA; /* A very light grey for subtle contrast */
+    --primary-color: #0D2149;
+    --secondary-color: #B58D4D;
+    --background-color: #F8F9FA;
     --text-color: #555;
     --heading-color: #111;
     --white-color: #FFFFFF;
@@ -49,6 +41,12 @@ body {
 
 html {
     scroll-behavior: smooth;
+}
+
+/* NEW: Main content padding for fixed header */
+main {
+    /* Desktop padding: 90px logo + 32px padding = 122px */
+    padding-top: 122px; 
 }
 
 /* 2. Utility Classes */
@@ -94,7 +92,7 @@ h2 {
 }
 
 .btn:hover {
-    background-color: #a07b3e; /* Darker shade of gold */
+    background-color: #a07b3e;
     transform: translateY(-2px);
 }
 
@@ -171,7 +169,7 @@ h2 {
     align-items: center;
     text-align: center;
     color: var(--white-color);
-    padding-top: 60px; /* Offset for the fixed navbar */
+    /* REMOVED: padding-top: 60px; (main tag handles this now) */
 }
 
 #hero .hero-content {
@@ -366,7 +364,7 @@ footer {
 .page-header {
     background: var(--primary-color);
     color: var(--white-color);
-    padding-top: 120px; /* Space for navbar */
+    /* REMOVED: padding-top: 120px; (main tag handles this) */
     padding-bottom: 40px;
     text-align: center;
 }
@@ -473,26 +471,28 @@ footer {
 */
 @media (max-width: 768px) {
 
+    /* NEW: Increase padding-top to make space for tall mobile nav */
+    main {
+        /* Mobile padding: ~122px (logo) + 16px (margin) + ~200px (links) */
+        padding-top: 340px; 
+    }
+
     /* --- General Mobile Styles --- */
     .container {
-        /* Reduce padding on small screens to give content more space */
         padding: 0 1rem;
     }
 
     h1, #hero h1 {
-        /* Further reduce hero title size */
         font-size: 2.2rem; 
-        word-wrap: break-word; /* Ensure long words don't overflow */
+        word-wrap: break-word;
     }
 
     h2 {
-        /* Reduce section heading size */
         font-size: 2rem;
     }
 
     /* --- Hero Fix --- */
     #hero .hero-content {
-        /* Add padding so text doesn't touch the edges */
         padding: 0 1rem; 
     }
 
@@ -502,7 +502,6 @@ footer {
     }
 
     .navbar nav ul {
-        /* Stack nav links vertically */
         flex-direction: column;
         align-items: center;
         margin-top: 1rem;
@@ -510,7 +509,6 @@ footer {
     }
 
     .navbar nav ul li {
-        /* Add vertical spacing */
         margin: 0.5rem 0;
         padding: 0.25rem;
     }
@@ -518,7 +516,6 @@ footer {
     /* --- Grid Fixes for index.html --- */
     .services-grid,
     .why-us-grid {
-        /* Force single-column layout for services and features */
         grid-template-columns: 1fr;
     }
 
