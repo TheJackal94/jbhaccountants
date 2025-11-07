@@ -9,11 +9,11 @@
 8.  Call to Action (CTA) Section
 9.  Contact Section
 10. Footer
-11. Animations & Responsive Design
+11. Animations
 12. New Page Styles
-13. (Section 13 was removed)
-14. Fix for initial section visibility
-15. Form Status Styles
+13. Fix for initial section visibility
+14. Form Status Styles
+15. MOBILE RESPONSIVE STYLES (Consolidated)
 --------------------------- */
 
 /* 1. Global Styles & Variables */
@@ -112,10 +112,7 @@ h2 {
     position: fixed;
     top: 0;
     width: 100%;
-    /* CHANGED: Solid white background */
     background-color: var(--white-color); 
-    /* REMOVED: backdrop-filter: blur(10px); */
-    /* CHANGED: Increased padding for the larger logo */
     padding: 1rem 0; 
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.07);
@@ -129,7 +126,6 @@ h2 {
 }
 
 .navbar .logo img {
-    /* CHANGED: Height increased by 40% (50px -> 70px) */
     height: 90px; 
     width: auto;
 }
@@ -169,7 +165,6 @@ h2 {
 /* 4. Hero Section */
 #hero {
     height: 100vh;
-    /* UPDATED: Using your local hero-background.jpg file */
     background: linear-gradient(rgba(13, 33, 73, 0.7), rgba(13, 33, 73, 0.7)), url('hero-background.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -348,7 +343,7 @@ footer {
     padding: 1.5rem 0;
 }
 
-/* 11. Animations & Responsive Design */
+/* 11. Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -364,7 +359,6 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
-
 
 /* 12. New Page Styles
 --------------------------- */
@@ -441,9 +435,40 @@ footer {
     color: var(--primary-color);
 }
 
+/* 13. Fix for initial section visibility
+--------------------------- */
+.section.first-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 14. Form Status Styles
+--------------------------- */
+#form-status {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#form-status.sending {
+    color: var(--text-color);
+    opacity: 1;
+}
+
+#form-status.success {
+    color: #28a745; /* A nice green */
+    opacity: 1;
+}
+
+#form-status.error {
+    color: #dc3545; /* A clear red */
+    opacity: 1;
+}
 
 /* ===============================================
-  MOBILE RESPONSIVE STYLES (Consolidated)
+  15. MOBILE RESPONSIVE STYLES (Consolidated)
 ===============================================
 */
 @media (max-width: 768px) {
@@ -457,11 +482,18 @@ footer {
     h1, #hero h1 {
         /* Further reduce hero title size */
         font-size: 2.2rem; 
+        word-wrap: break-word; /* Ensure long words don't overflow */
     }
 
     h2 {
         /* Reduce section heading size */
         font-size: 2rem;
+    }
+
+    /* --- Hero Fix --- */
+    #hero .hero-content {
+        /* Add padding so text doesn't touch the edges */
+        padding: 0 1rem; 
     }
 
     /* --- Mobile Navigation --- */
@@ -501,36 +533,3 @@ footer {
     }
 }
 /* (End of consolidated mobile styles) */
-
-
-/* 14. Fix for initial section visibility
---------------------------- */
-.section.first-section {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 15. Form Status Styles
---------------------------- */
-#form-status {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-#form-status.sending {
-    color: var(--text-color);
-    opacity: 1;
-}
-
-#form-status.success {
-    color: #28a745; /* A nice green */
-    opacity: 1;
-}
-
-#form-status.error {
-    color: #dc3545; /* A clear red */
-    opacity: 1;
-}
