@@ -1,31 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Smart Scrolling for Navbar links (Updated) ---
-    // This new code handles both same-page and cross-page links.
+    // --- Smart Scrolling for Navbar links (Existing Code) ---
     const navLinks = document.querySelectorAll('header nav a');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
 
-            // Check if it's a link to another page (like 'resources.html')
             if (!href.startsWith('#') && href.includes('.html')) {
-                // Let the browser handle the navigation normally
                 return;
             }
 
-            // Check if it's a link to a section on the homepage
             if (href.startsWith('index.html#')) {
-                // If we are NOT on the homepage, let the browser navigate
                 if (!window.location.pathname.endsWith('/') && !window.location.pathname.endsWith('index.html')) {
                     return;
                 }
             }
 
-            // If we are on the homepage and the link is a hash, smooth scroll
             const targetId = this.hash;
             if (targetId) {
-                e.preventDefault(); // Prevent default jump
+                e.preventDefault(); 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     targetElement.scrollIntoView({
@@ -36,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Fade-in sections on scroll (No changes needed here) ---
+    // --- Fade-in sections on scroll (Existing Code) ---
     const sections = document.querySelectorAll('.section');
 
     const sectionObserver = new IntersectionObserver((entries, observer) => {
@@ -54,4 +48,53 @@ document.addEventListener('DOMContentLoaded', function() {
     sections.forEach(section => {
         sectionObserver.observe(section);
     });
-});
+
+    // --- NEW CODE: AJAX Contact Form Submission ---
+    const form = document.getElementById('contact-form');
+    
+    async function handleSubmit(event) {
+        event.preventDefault(); // This stops the redirect
+        const status = document.getElementById('form-status');
+        const data = new FormData(event.target);
+        const button = form.querySelector('button');
+
+        // Disable button and show "Sending"
+        button.disabled = true;
+        status.innerHTML = "Sending...";
+        status.className = 'sending';
+
+        try {
+            const response = await fetch(event.target.action, {
+                method: event.target.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Success!
+                status.innerHTML = "Thanks! Your message has been sent.";
+                status.className = 'success';
+                form.reset();
+                button.disabled = false;
+            } else {
+                // Server error
+                status.innerHTML = "Oops! There was a problem.";
+                status.className = 'error';
+                button.disabled = false;
+            }
+        } catch (error) {
+            // Network error
+            status.innerHTML = "Oops! There was a network error.";
+            status.className = 'error';
+            button.disabled = false;
+        }
+    }
+
+    // Only add the listener if the form exists on this page
+    if (form) {
+        form.addEventListener("submit", handleSubmit);
+    }
+
+}); // --- End of DOMContentLoaded ---
